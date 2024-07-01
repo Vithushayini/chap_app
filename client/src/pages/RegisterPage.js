@@ -7,9 +7,6 @@ import toast from 'react-hot-toast';
 
 const RegisterPage = () => {
 
-  
-
-
   const [data,setData] = useState({
     name : "",
     email : "",
