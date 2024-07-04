@@ -9,12 +9,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import EditUserDetails from './EditUserDetails';
 import { FiArrowUpLeft } from "react-icons/fi";
 import SearchUser from './SearchUser';
+import userSlice from '../redux/userSlice';
 
 function Sidebar() {
     const user = useSelector(state => state?.user)
     const [editUserOpen,setEditUserOpen] = useState(false)
     const [allUser, setAllUser] = useState([])
     const [openSearchUser,setOpenSearchUser] = useState(false)
+    const socketConnection = useSelector(state => state?.user?.socketConnection)
+
+    useEffect(()=>{
+      if(socketConnection){
+        socketConnection.emit('sidebar',user._id)
+      }
+    },[socketConnection,user])
 
   return (
     <div className='w-full h-full grid grid-cols-[48px,1fr] bg-white'>
